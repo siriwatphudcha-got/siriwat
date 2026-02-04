@@ -1,24 +1,18 @@
 <?php
- include_once("check_login.php");
+require 'secure.php';
 ?>
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>หน้าจัดการสินค้า - สิริวัฒน์</title>
+    <meta charset="utf-8">
+    <title>product</title>
 </head>
-
 <body>
-<h1>หน้าจัดการสินค้า - สิริวัฒน์</h1>
 
-<?php echo "แอดมิน:".$_SESSION['aname'];?><br>
+<h1>จัดการสินค้า</h1>
+<p>หน้านี้แสดงข้อมูลสินค้า</p>
 
+<a href="index2.php">กลับหน้าหลัก</a>
 
-<ul>
-    <a href="products.php"><li>จัดการสินค้า</li></a>
-    <a href="orders.php"><li>จัดการออเดอร์</li></a>
-    <a href="customers.php"><li>จัดการลูกค้า</li></a>
-    <a href="logout.php"><li>ออกจากระบบ</li></a>
-</ul>
 </body>
 </html>

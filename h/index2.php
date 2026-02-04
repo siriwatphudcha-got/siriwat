@@ -1,31 +1,23 @@
 <?php
-  session_start();
-  if(empty($_SESSION['aid'])){
-    echo "Access Denied";
-    echo"<meta http-equiv='refresh'content='3;url=index.php'>";
-    exit;
-  }
+require 'secure.php';
 ?>
-<?php
-  include_once("check_login.php");
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>หน้าหลักแอดมิน - สิริวัฒน์</title>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
 </head>
-
 <body>
-<h1>หน้าหลักแอดมิน - สิริวัฒน์</h1>
 
-<?php echo "แอดมิน:".$_SESSION['aname'];?><br>
-
+<h1>ยินดีต้อนรับ</h1>
+<p>สวัสดีคุณ <?= htmlspecialchars($_SESSION['aname']) ?></p>
 
 <ul>
-    <a href="products.php"><li>จัดการสินค้า</li></a>
-    <a href="orders.php"><li>จัดการออเดอร์</li></a>
-    <a href="customers.php"><li>จัดการลูกค้า</li></a>
-    <a href="logout.php"><li>ออกจากระบบ</li></a>
+    <li><a href="customer.php">จัดการลูกค้า</a></li>
+    <li><a href="product.php">จัดการสินค้า</a></li>
+    <li><a href="order.php">จัดการคำสั่งซื้อ</a></li>
+    <li><a href="logout.php">Logout</a></li>
 </ul>
+
 </body>
 </html>

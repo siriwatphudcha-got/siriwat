@@ -1,6 +1,12 @@
 <?php
 declare(strict_types=1);
 session_start();
+
+if (isset($_SESSION['aid'])) {
+    header('Location: index2.php');
+    exit;
+}
+
 $config = require __DIR__ . '/connectdb.php';
 
 try {
@@ -15,13 +21,7 @@ try {
         ]
     );
 } catch (PDOException $e) {
-    die("เชื่อมต่อฐานข้อมูลไม่สำเร็จ");
-}
-
-
-if (isset($_SESSION['aid'])) {
-    header('Location: index2.php');
-    exit;
+    die('เชื่อมต่อฐานข้อมูลไม่สำเร็จ');
 }
 
 $error = '';
@@ -31,9 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['apwd'] ?? '';
 
     $stmt = $conn->prepare(
-        "SELECT a_id, a_name, a_password 
-         FROM admin 
-         WHERE a_username = :u 
+        "SELECT a_id, a_name, a_password
+         FROM admin
+         WHERE a_username = :u
          LIMIT 1"
     );
     $stmt->execute(['u' => $username]);
@@ -46,19 +46,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: index2.php');
         exit;
     }
+
     $error = 'Username หรือ Password ไม่ถูกต้อง';
 }
 ?>
 <!doctype html>
 <html>
-<head><meta charset="utf-8"><title>Login</title></head>
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+</head>
 <body>
 <h1>Login</h1>
+
 <p style="color:red;"><?= htmlspecialchars($error) ?></p>
+
 <form method="post">
     Username <input name="auser" required><br><br>
-    Password <input type="password" name="apwd" required><br><br>
-    <button>LOGIN</button>
-</form>
-</body>
-</html>
+    Password <input type="password" name="apwd" re
