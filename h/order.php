@@ -1,23 +1,15 @@
 <?php
-  session_start();
-  if(empty($_SESSION['aid'])){
-    echo "Access Denied";
-    echo"<meta http-equiv='refresh'content='3;url=index.php'>";
-    exit;
-  }
-?>
-<?php
-  include_once("check_login.php");
+ include_once("check_login.php");
 ?>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>หน้าหลักแอดมิน - สิริวัฒน์</title>
+<title>หน้าจัดการออเดอร์ - สิริวัฒน์</title>
 </head>
 
 <body>
-<h1>หน้าหลักแอดมิน - สิริวัฒน์</h1>
+<h1>หน้าจัดการออเดอร์ - สิริวัฒน์</h1>
 
 <?php echo "แอดมิน:".$_SESSION['aname'];?><br>
 
