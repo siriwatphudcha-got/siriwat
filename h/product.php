@@ -1,24 +1,24 @@
 <?php
-require_once 'secure/auth_guard.php';
-require_once 'connectdb.php';
-
-$stmt = $conn->query("SELECT * FROM product ORDER BY id DESC");
-$data = $stmt->fetchAll();
+ include_once("check_login.php");
 ?>
 <!doctype html>
 <html>
-<head><meta charset="utf-8"><title>Product</title></head>
+<head>
+<meta charset="utf-8">
+<title>หน้าจัดการสินค้า - สิริวัฒน์</title>
+</head>
+
 <body>
-<h1>Product</h1>
-<table border="1">
-<tr><th>ID</th><th>Name</th><th>Price</th></tr>
-<?php foreach ($data as $p): ?>
-<tr>
-<td><?= $p['id'] ?></td>
-<td><?= htmlspecialchars($p['name']) ?></td>
-<td><?= number_format($p['price'],2) ?></td>
-</tr>
-<?php endforeach; ?>
-</table>
+<h1>หน้าจัดการสินค้า - สิริวัฒน์</h1>
+
+<?php echo "แอดมิน:".$_SESSION['aname'];?><br>
+
+
+<ul>
+    <a href="products.php"><li>จัดการสินค้า</li></a>
+    <a href="orders.php"><li>จัดการออเดอร์</li></a>
+    <a href="customers.php"><li>จัดการลูกค้า</li></a>
+    <a href="logout.php"><li>ออกจากระบบ</li></a>
+</ul>
 </body>
 </html>
