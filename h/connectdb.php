@@ -1,8 +1,10 @@
 <?php
-		$host = "localhost";
-		$user = "root";
-		$pwd = "Golf@2004";
-		$db = "4199db";
-		$conn = mysqli_connect($host, $user, $pwd, $db) or die ("เชื่อมต่อฐานข้อมูลไม่ได้");
-		mysqli_query($conn, "SET NAMES utf8");
-?>
+declare(strict_types=1);
+
+return [
+    'host' => 'localhost',
+    'db'   => '4199db',
+    'user' => 'root',
+    'pass' => 'Golf@2004',
+    'charset' => 'utf8mb4',
+];
