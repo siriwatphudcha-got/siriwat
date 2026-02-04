@@ -1,7 +1,23 @@
 <?php
 declare(strict_types=1);
 session_start();
-require_once 'connectdb.php';
+$config = require __DIR__ . '/connectdb.php';
+
+try {
+    $dsn = "mysql:host={$config['host']};dbname={$config['db']};charset={$config['charset']}";
+    $conn = new PDO(
+        $dsn,
+        $config['user'],
+        $config['pass'],
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ]
+    );
+} catch (PDOException $e) {
+    die("เชื่อมต่อฐานข้อมูลไม่สำเร็จ");
+}
+
 
 if (isset($_SESSION['aid'])) {
     header('Location: index2.php');
