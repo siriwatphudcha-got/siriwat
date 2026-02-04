@@ -1,58 +1,48 @@
 <?php
+declare(strict_types=1);
 session_start();
+require_once 'connectdb.php';
+
+if (isset($_SESSION['aid'])) {
+    header('Location: index2.php');
+    exit;
+}
+
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['auser'] ?? '');
+    $password = $_POST['apwd'] ?? '';
+
+    $stmt = $conn->prepare(
+        "SELECT a_id, a_name, a_password 
+         FROM admin 
+         WHERE a_username = :u 
+         LIMIT 1"
+    );
+    $stmt->execute(['u' => $username]);
+    $user = $stmt->fetch();
+
+    if ($user && password_verify($password, $user['a_password'])) {
+        session_regenerate_id(true);
+        $_SESSION['aid']   = $user['a_id'];
+        $_SESSION['aname'] = $user['a_name'];
+        header('Location: index2.php');
+        exit;
+    }
+    $error = 'Username หรือ Password ไม่ถูกต้อง';
+}
 ?>
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>สิริวัฒน์ พุดชา</title>
-</head>
-
+<head><meta charset="utf-8"><title>Login</title></head>
 <body>
-
-<h1>หน้าเข้าสู่ระบบ - สิริวัฒน์</h1>
-
-<form method="post" action="">
-    Username 
-    <input type="text" name="auser" autofocus required><br><br>
-
-    Password 
-    <input type="password" name="apwd" required><br><br>
-
-    <button type="submit" name="Submit">LOGIN</button>
+<h1>Login</h1>
+<p style="color:red;"><?= htmlspecialchars($error) ?></p>
+<form method="post">
+    Username <input name="auser" required><br><br>
+    Password <input type="password" name="apwd" required><br><br>
+    <button>LOGIN</button>
 </form>
-
-<?php
-if (isset($_POST['Submit'])) {
-
-    include_once("connectdb.php");
-
-    $auser = $_POST['auser'];
-    $apwd  = $_POST['apwd'];
-
-    $sql = "SELECT * FROM admin 
-            WHERE a_username='$auser' 
-            AND a_password='$apwd' 
-            LIMIT 1";
-
-    $rs  = mysqli_query($conn, $sql);
-    $num = mysqli_num_rows($rs);
-
-    if ($num == 1) {
-        $data = mysqli_fetch_array($rs);
-        $_SESSION['aid']   = $data['a_id'];
-        $_SESSION['aname'] = $data['a_name'];
-
-        echo "<script>";
-        echo "window.location='index2.php';";
-        echo "</script>";
-    } else {
-        echo "<script>";
-        echo "alert('Username หรือ Password ไม่ถูกต้อง');";
-        echo "</script>";
-    }
-}
-?>
-
 </body>
 </html>
