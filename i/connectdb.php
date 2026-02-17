@@ -1,5 +1,5 @@
 <?php
-		$host = "localhost";
+		$host = "45.136.255.138";
 		$user = "root";
 		$pwd = "";
 		$db = "4199db";
