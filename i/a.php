@@ -28,6 +28,7 @@ if(isset($_POST['Submit'])){
     <tr>
         <th>รหัสภาค</th>
         <th>ชื่อภาค</th>
+        <th>รูปภาพ</th>
         <th>ลบ</th>
     </tr>
 
