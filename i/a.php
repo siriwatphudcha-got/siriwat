@@ -5,7 +5,7 @@
 <title>งาน i  -- สิริวัฒน์  พุดชา (ก็อต)</title>
 </head>
 <body>
-<h1>งาน i  -- สิริวัฒน์  พุดชา(dHv9) </h1>
+<h1>งาน i  -- สิริวัฒน์  พุดชา(ก็อต) </h1>
 
 <form method="post" action="">
     ชื่อภาค <input type="text" name="rname" autofocus required>
